@@ -11,9 +11,6 @@
     "TorrentTotemItemTickMixin",
     "TunnelingEnchantmentMixin"
   ],
-  "client": [
-    "BetterArcheologyMixin"
-  ],
   "server": [
   ],
   "injectors": {
