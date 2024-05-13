@@ -142,7 +142,7 @@ public class ModBlocks
     public static final Block LOOT_VASE_GREEN = registerBlockWithoutTab("loot_vase_green", new LootVaseBlock(FabricBlockSettings.copy(Blocks.FLOWER_POT).sounds(BlockSoundGroup.DECORATED_POT)));
     public static final Block VASE_GREEN = registerBlock("vase_green", new VaseBlock(FabricBlockSettings.copy(Blocks.FLOWER_POT).sounds(BlockSoundGroup.DECORATED_POT)), ModItemGroup.BETTER_ARCHEOLOGY_ITEMGROUP);
 
-    public static final Block EVOKER_TRAP = registerBlockWithoutTab("evoker_trap", new EvokerTrapBlock(FabricBlockSettings.copy(Blocks.STONE).strength(25f).pistonBehavior(PistonBehavior.BLOCK)));
+    public static final Block EVOKER_TRAP = registerBlock("evoker_trap", new EvokerTrapBlock(FabricBlockSettings.copy(Blocks.STONE).strength(20f).requiresTool().pistonBehavior(PistonBehavior.BLOCK)), ModItemGroup.BETTER_ARCHEOLOGY_ITEMGROUP);
 
     public static final Block CHISELED_BONE_BLOCK = registerBlock("chiseled_bone_block", new PillarBlock(FabricBlockSettings.of().mapColor(MapColor.STONE_GRAY).strength(0.3F).instrument(Instrument.XYLOPHONE).sounds(BlockSoundGroup.BONE)), ModItemGroup.BETTER_ARCHEOLOGY_ITEMGROUP);
 
