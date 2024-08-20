@@ -4,13 +4,13 @@
     "item": "betterarcheology:unidentified_artifact"
   },
   "result": {
-    "item": "minecraft:enchanted_book",
+    "id": "minecraft:enchanted_book",
     "Count": 1,
-    "nbt": {
+    "tag": {
       "StoredEnchantments": [
         {
-          "lvl": 1,
-          "id": "betterarcheology:tunneling"
+          "id": "betterarcheology:tunneling",
+          "lvl": 1
         }
       ]
     }
