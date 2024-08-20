@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_cracked_mud_bricks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_cracked_mud_bricks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betterarcheology:cracked_mud_brick_slab"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

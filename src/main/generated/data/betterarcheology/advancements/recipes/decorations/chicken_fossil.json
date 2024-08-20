@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_chicken_fossil_body",
-      "has_chicken_fossil_head",
-      "has_the_recipe"
+      "has_chicken_fossil_head"
     ]
   ],
   "rewards": {
     "recipes": [
       "betterarcheology:chicken_fossil"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

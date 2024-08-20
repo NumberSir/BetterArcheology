@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_ocelot_fossil_body",
-      "has_ocelot_fossil_head",
-      "has_the_recipe"
+      "has_ocelot_fossil_head"
     ]
   ],
   "rewards": {
     "recipes": [
       "betterarcheology:ocelot_fossil"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

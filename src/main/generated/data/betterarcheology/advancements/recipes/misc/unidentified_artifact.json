@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_artifact_shards",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_artifact_shards"
     ]
   ],
   "rewards": {
     "recipes": [
       "betterarcheology:unidentified_artifact"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

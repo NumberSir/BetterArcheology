@@ -34,15 +34,14 @@
   },
   "requirements": [
     [
+      "has_the_recipe",
       "has_wolf_fossil_body",
-      "has_wolf_fossil_head",
-      "has_the_recipe"
+      "has_wolf_fossil_head"
     ]
   ],
   "rewards": {
     "recipes": [
       "betterarcheology:wolf_fossil"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }

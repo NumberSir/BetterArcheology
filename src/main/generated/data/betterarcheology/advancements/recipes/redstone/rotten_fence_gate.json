@@ -22,14 +22,13 @@
   },
   "requirements": [
     [
-      "has_rotten_planks",
-      "has_the_recipe"
+      "has_the_recipe",
+      "has_rotten_planks"
     ]
   ],
   "rewards": {
     "recipes": [
       "betterarcheology:rotten_fence_gate"
     ]
-  },
-  "sends_telemetry_event": false
+  }
 }
