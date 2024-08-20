@@ -1,20 +1,20 @@
 package net.Pandarix.betterarcheology.compat.jei.recipe;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
+import com.mojang.serialization.Codec;
+import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.Pandarix.betterarcheology.BetterArcheology;
 import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NbtCompound;
 import net.minecraft.nbt.NbtList;
 import net.minecraft.nbt.NbtString;
-import net.minecraft.nbt.StringNbtReader;
 import net.minecraft.network.PacketByteBuf;
-import net.minecraft.recipe.*;
+import net.minecraft.recipe.Ingredient;
+import net.minecraft.recipe.Recipe;
+import net.minecraft.recipe.RecipeSerializer;
+import net.minecraft.recipe.RecipeType;
 import net.minecraft.registry.DynamicRegistryManager;
 import net.minecraft.registry.Registries;
-import net.minecraft.util.Identifier;
-import net.minecraft.util.JsonHelper;
 import net.minecraft.util.collection.DefaultedList;
 import net.minecraft.world.World;
 import org.jetbrains.annotations.NotNull;
@@ -23,14 +23,12 @@ public class IdentifyingRecipe implements Recipe<SimpleInventory>
 {
     private final Ingredient input;
     private final ItemStack result;
-    private final Identifier id;
     private static final int POSSIBLE_RESULT_COUNT = Registries.ENCHANTMENT.streamEntries().filter(reference -> reference.registryKey().getValue().getNamespace().equals(BetterArcheology.MOD_ID)).toList().size();
 
-    public IdentifyingRecipe(Ingredient inputItems, ItemStack result, Identifier id)
+    public IdentifyingRecipe(Ingredient inputItems, ItemStack result)
     {
         this.input = inputItems;
         this.result = result;
-        this.id = id;
     }
 
     @Override
@@ -61,7 +59,7 @@ public class IdentifyingRecipe implements Recipe<SimpleInventory>
     @Override
     public ItemStack craft(SimpleInventory pContainer, DynamicRegistryManager pRegistryAccess)
     {
-        return this.getOutput(pRegistryAccess);
+        return this.getResult(pRegistryAccess);
     }
 
     @Override
@@ -72,13 +70,13 @@ public class IdentifyingRecipe implements Recipe<SimpleInventory>
 
     @NotNull
     @Override
-    public ItemStack getOutput(DynamicRegistryManager pRegistryAccess)
+    public ItemStack getResult(DynamicRegistryManager pRegistryAccess)
     {
         return this.getResult();
     }
 
     /**
-     * Extra method instead of {@link #getOutput} for use without unnecessary parameter
+     * Extra method instead of {@link #getResult} for use without unnecessary parameter
      *
      * @return ItemStack to be crafted when done
      */
@@ -122,7 +120,19 @@ public class IdentifyingRecipe implements Recipe<SimpleInventory>
 
     public static class Serializer implements RecipeSerializer<IdentifyingRecipe>
     {
+        private static final Codec<IdentifyingRecipe> CODEC = RecordCodecBuilder.create(
+                (builder) -> builder.group(
+                        Ingredient.DISALLOW_EMPTY_CODEC.fieldOf("input").forGetter((IdentifyingRecipe recipe) -> recipe.input),
+                        ItemStack.CODEC.fieldOf("result").forGetter((IdentifyingRecipe recipe) -> recipe.result)
+                ).apply(builder, IdentifyingRecipe::new));
+
         public static final Serializer INSTANCE = new Serializer();
+
+        @Override
+        public @NotNull Codec<IdentifyingRecipe> codec()
+        {
+            return CODEC;
+        }
 
         @Override
         public void write(PacketByteBuf packetByteBuf, IdentifyingRecipe recipe)
@@ -132,43 +142,12 @@ public class IdentifyingRecipe implements Recipe<SimpleInventory>
         }
 
         @Override
-        public IdentifyingRecipe read(Identifier id, JsonObject json)
-        {
-            JsonObject itemStackObject = JsonHelper.getObject(json, "result");
-
-            ItemStack output = ShapedRecipe.outputFromJson(itemStackObject);
-            Ingredient input = Ingredient.fromJson(JsonHelper.getObject(json, "input"));
-
-            // custom enchantment nbt parsing because fabrics outputFromJson refuses to
-            if (itemStackObject.has("nbt"))
-            {
-                try
-                {
-                    JsonElement element = itemStackObject.get("nbt");
-                    NbtCompound nbt = StringNbtReader.parse(JsonHelper.toSortedString(element));
-                    output.setNbt(nbt);
-                } catch (Exception e)
-                {
-                    BetterArcheology.LOGGER.error("Could not parse Enchantment nbt compound for IdentifyingRecipe " + id.toString() + ":" + e);
-                }
-            }
-
-            return new IdentifyingRecipe(input, output, id);
-        }
-
-        @Override
-        public IdentifyingRecipe read(Identifier identifier, PacketByteBuf packetByteBuf)
+        public IdentifyingRecipe read(PacketByteBuf packetByteBuf)
         {
             Ingredient input = Ingredient.fromPacket(packetByteBuf);
             ItemStack result = packetByteBuf.readItemStack();
 
-            return new IdentifyingRecipe(input, result, identifier);
+            return new IdentifyingRecipe(input, result);
         }
-    }
-
-    @Override
-    public Identifier getId()
-    {
-        return id;
     }
 }

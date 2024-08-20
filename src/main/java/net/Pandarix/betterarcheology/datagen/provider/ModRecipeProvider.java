@@ -7,15 +7,13 @@ import net.fabricmc.fabric.api.datagen.v1.FabricDataOutput;
 import net.fabricmc.fabric.api.datagen.v1.provider.FabricRecipeProvider;
 import net.minecraft.block.Blocks;
 import net.minecraft.data.server.recipe.CookingRecipeJsonBuilder;
-import net.minecraft.data.server.recipe.RecipeJsonProvider;
+import net.minecraft.data.server.recipe.RecipeExporter;
 import net.minecraft.data.server.recipe.ShapedRecipeJsonBuilder;
 import net.minecraft.data.server.recipe.ShapelessRecipeJsonBuilder;
 import net.minecraft.item.Items;
 import net.minecraft.recipe.Ingredient;
 import net.minecraft.recipe.book.RecipeCategory;
 import net.minecraft.registry.tag.ItemTags;
-
-import java.util.function.Consumer;
 
 public class ModRecipeProvider extends FabricRecipeProvider
 {
@@ -25,7 +23,7 @@ public class ModRecipeProvider extends FabricRecipeProvider
     }
 
     @Override
-    public void generate(Consumer<RecipeJsonProvider> exporter)
+    public void generate(RecipeExporter exporter)
     {
         buildFossilRecipes(exporter);
         buildBrickRecipes(exporter);
@@ -33,7 +31,7 @@ public class ModRecipeProvider extends FabricRecipeProvider
         buildRottenRecipes(exporter);
     }
 
-    private static void buildRottenRecipes(Consumer<RecipeJsonProvider> exporter)
+    private static void buildRottenRecipes(RecipeExporter exporter)
     {
         offerPlanksRecipe(exporter, ModBlocks.ROTTEN_PLANKS, ModTags.Items.ROTTEN_LOGS, 4);
 
@@ -96,7 +94,7 @@ public class ModRecipeProvider extends FabricRecipeProvider
                 .offerTo(exporter);
     }
 
-    private static void buildMiscRecipes(Consumer<RecipeJsonProvider> exporter)
+    private static void buildMiscRecipes(RecipeExporter exporter)
     {
         ShapedRecipeJsonBuilder.create(RecipeCategory.MISC, ModItems.UNIDENTIFIED_ARTIFACT)
                 .pattern("###")
@@ -148,7 +146,7 @@ public class ModRecipeProvider extends FabricRecipeProvider
         offerNetheriteUpgradeRecipe(exporter, ModItems.DIAMOND_BRUSH, RecipeCategory.TOOLS, ModItems.NETHERITE_BRUSH);
     }
 
-    private static void buildBrickRecipes(Consumer<RecipeJsonProvider> exporter)
+    private static void buildBrickRecipes(RecipeExporter exporter)
     {
         ShapedRecipeJsonBuilder.create(RecipeCategory.BUILDING_BLOCKS, ModBlocks.CRACKED_MUD_BRICK_SLAB, 6)
                 .pattern("###")
@@ -175,7 +173,7 @@ public class ModRecipeProvider extends FabricRecipeProvider
                 ).criterion(hasItem(Blocks.MUD_BRICKS), conditionsFromItem(Blocks.MUD_BRICKS)).offerTo(exporter);
     }
 
-    private static void buildFossilRecipes(Consumer<RecipeJsonProvider> exporter)
+    private static void buildFossilRecipes(RecipeExporter exporter)
     {
         ShapelessRecipeJsonBuilder.create(RecipeCategory.DECORATIONS, ModBlocks.CHICKEN_FOSSIL)
                 .group("ba_fossils")

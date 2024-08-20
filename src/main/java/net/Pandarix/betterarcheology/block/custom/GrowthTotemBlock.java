@@ -88,7 +88,7 @@ public class GrowthTotemBlock extends FlowerBlock
                 BlockState state = world.getBlockState(pos);
                 if (state.getBlock() instanceof CropBlock cropBlock)
                 {
-                    if (cropBlock.isFertilizable(world, pos, state, world.isClient()))
+                    if (cropBlock.isFertilizable(world, pos, state))
                     {
                         if (cropBlock.canGrow(world, world.random, pos, state))
                         {

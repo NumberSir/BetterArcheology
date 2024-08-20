@@ -11,6 +11,7 @@ import net.Pandarix.betterarcheology.compat.jei.recipe.IdentifyingRecipe;
 import net.Pandarix.betterarcheology.screen.IdentifyingScreen;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.ItemStack;
+import net.minecraft.recipe.RecipeEntry;
 import net.minecraft.recipe.RecipeManager;
 import net.minecraft.util.Identifier;
 import org.jetbrains.annotations.NotNull;
@@ -40,7 +41,7 @@ public class JeiPlugin implements IModPlugin
         {
             RecipeManager recipeManager = MinecraftClient.getInstance().world.getRecipeManager();
 
-            List<IdentifyingRecipe> identifyingRecipes = new ArrayList<>(recipeManager.listAllOfType(IdentifyingRecipe.Type.INSTANCE));
+            List<IdentifyingRecipe> identifyingRecipes = new ArrayList<>(recipeManager.listAllOfType(IdentifyingRecipe.Type.INSTANCE).stream().map(RecipeEntry::value).toList());
 
             registration.addRecipes(IdentifyingCategory.IDENTIFYING_RECIPE_TYPE, identifyingRecipes);
         }

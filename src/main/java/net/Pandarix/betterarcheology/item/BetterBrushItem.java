@@ -44,7 +44,7 @@ public class BetterBrushItem extends BrushItem
 
     public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
         if (remainingUseTicks >= 0 && user instanceof PlayerEntity playerEntity) {
-            HitResult hitResult = this.getHitResult(user);
+            HitResult hitResult = this.getHitResult(playerEntity);
             if (hitResult instanceof BlockHitResult blockHitResult) {
                 if (hitResult.getType() == HitResult.Type.BLOCK) {
                     int i = this.getMaxUseTime(stack) - remainingUseTicks + 1;
@@ -57,9 +57,8 @@ public class BetterBrushItem extends BrushItem
                         this.addDustParticles(world, blockHitResult, blockState, user.getRotationVec(0.0F), arm);
                         Block var15 = blockState.getBlock();
                         SoundEvent soundEvent;
-                        if (var15 instanceof BrushableBlock)
+                        if (var15 instanceof BrushableBlock brushableBlock)
                         {
-                            BrushableBlock brushableBlock = (BrushableBlock) var15;
                             soundEvent = brushableBlock.getBrushingSound();
                         } else
                         {
@@ -76,9 +75,7 @@ public class BetterBrushItem extends BrushItem
                                 {
                                     EquipmentSlot equipmentSlot = stack.equals(playerEntity.getEquippedStack(EquipmentSlot.OFFHAND)) ? EquipmentSlot.OFFHAND : EquipmentSlot.MAINHAND;
                                     stack.damage(1, user, (userx) ->
-                                    {
-                                        userx.sendEquipmentBreakStatus(equipmentSlot);
-                                    });
+                                            userx.sendEquipmentBreakStatus(equipmentSlot));
                                 }
                             }
                         }
