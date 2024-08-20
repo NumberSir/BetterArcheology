@@ -83,12 +83,15 @@
   "advancements.all_fossils_found.description": "Sammle alle Fossilteile!",
   "advancements.growth_totem": "Wo man es am wenigsten erwartet",
   "advancements.growth_totem.description": "Finde das Leben, das unter den Toten wuchs",
+  "advancements.netherite_brush.title": "Wahnsinnige Investition",
+  "advancements.netherite_brush.description": "Manchmal wird der Weg zu wahrer Größe durch fragwürdige Entscheidungen geebnet - aber nie mit Staub.",
 
   "block.betterarcheology.fossil_head_set": " [1/2]",
   "block.betterarcheology.fossil_body_set": " [2/2]",
 
   "item.betterarcheology.iron_brush": "Eisener Pinsel",
   "item.betterarcheology.diamond_brush": "Diamantener Pinsel",
+  "item.betterarcheology.netherite_brush": "Netheritpinsel",
   "block.betterarcheology.archeology_table": "Tisch der Archäologie",
   "item.betterarcheology.artifact_shards": "Artefaktscherben",
   "item.betterarcheology.unidentified_artifact": "Unidentifiziertes Artefakt",
@@ -119,5 +122,7 @@
   "enchantment.betterarcheology.tunneling.desc": "Baut auch den Block unterhalb des abgebauten Blocks ab",
 
   "filled_map.catacombs": "Katakomben-Entdeckerkarte",
-  "filled_map.light": "Lichttempel-Entdeckerkarte"
+  "filled_map.light": "Lichttempel-Entdeckerkarte",
+
+  "config.notify.disabled": "Diese Funktion wurde in der Konfiguration deaktiviert!"
 }

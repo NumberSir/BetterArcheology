@@ -1,8 +1,10 @@
 package net.Pandarix.betterarcheology.enchantment;
 
+import net.Pandarix.betterarcheology.BetterArcheologyConfig;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.ItemStack;
 
 public class ArtifactEnchantment extends Enchantment
 {
@@ -34,5 +36,12 @@ public class ArtifactEnchantment extends Enchantment
     public Rarity getRarity()
     {
         return Rarity.VERY_RARE;
+    }
+
+    @Override
+    public boolean isAcceptableItem(ItemStack stack)
+    {
+        return BetterArcheologyConfig.artifactsEnabled.get() && super.isAcceptableItem(stack);
+
     }
 }

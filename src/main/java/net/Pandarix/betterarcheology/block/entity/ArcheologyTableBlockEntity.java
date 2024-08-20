@@ -17,7 +17,6 @@ import net.minecraft.inventory.SimpleInventory;
 import net.minecraft.item.BrushItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
 import net.minecraft.loot.LootTable;
 import net.minecraft.loot.context.LootContextParameterSet;
 import net.minecraft.loot.context.LootContextParameters;
@@ -258,9 +257,7 @@ public class ArcheologyTableBlockEntity extends BlockEntity implements NamedScre
         }
 
         boolean hasShardInFirstSlot = entity.getStack(1).getItem() == ModItems.UNIDENTIFIED_ARTIFACT;                     //Input
-        boolean hasBrushInSlot = entity.getStack(0).getItem() == ModItems.IRON_BRUSH ||
-                entity.getStack(0).getItem() == ModItems.DIAMOND_BRUSH ||
-                entity.getStack(0).getItem() == Items.BRUSH;
+        boolean hasBrushInSlot = entity.getStack(0).getItem() instanceof BrushItem;
         return hasShardInFirstSlot && hasBrushInSlot && canInsertAmountIntoOutputSlot(inventory) && canInsertItemIntoOutputSlot(inventory, entity.getStack(2).getItem());
     }
 

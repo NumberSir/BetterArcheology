@@ -1,12 +1,12 @@
 {
 	"credit": "Made with Blockbench",
+	"ambientocclusion": false,
+	"render_type": "cutout",
 	"texture_size": [32, 32],
 	"textures": {
 		"0": "betterarcheology:block/fossils/chicken",
 		"particle": "item/bone"
 	},
-	"render_type": "cutout",
-	"ambientocclusion": false,
 	"elements": [
 		{
 			"from": [6.5, 0.1, 7],
@@ -89,7 +89,8 @@
 			"scale": [2, 2, 2]
 		},
 		"head": {
-			"translation": [0, 14.5, 0]
+			"translation": [0, 10.25, -4.25],
+			"scale": [2, 2, 2]
 		},
 		"fixed": {
 			"rotation": [-24.75, 0, 0],

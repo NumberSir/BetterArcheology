@@ -1,10 +1,9 @@
 package net.Pandarix.betterarcheology.enchantment;
 
+import net.Pandarix.betterarcheology.BetterArcheologyConfig;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.PickaxeItem;
-import net.minecraft.item.ShovelItem;
+import net.minecraft.item.*;
 
 public class TunnelingEnchantment extends ArtifactEnchantment
 {
@@ -16,6 +15,10 @@ public class TunnelingEnchantment extends ArtifactEnchantment
     @Override
     public boolean isAcceptableItem(ItemStack stack)
     {
-        return stack.getItem() instanceof PickaxeItem || stack.getItem() instanceof ShovelItem;
+        if (BetterArcheologyConfig.tunnelingEnabled.get() && BetterArcheologyConfig.artifactsEnabled.get())
+        {
+            return stack.getItem() instanceof PickaxeItem || stack.getItem() instanceof ShovelItem || stack.getItem() instanceof HoeItem || (stack.getItem() instanceof AxeItem && BetterArcheologyConfig.tunnelingAxeEnabled.get());
+        }
+        return false;
     }
 }

@@ -14,4 +14,5 @@ The following users are in no particular order.
 - dinkley
 - TwelveYO21
 - TheLegendofSaram / Adam
+- Linguardium
 - Austerlitz_Enthusiast

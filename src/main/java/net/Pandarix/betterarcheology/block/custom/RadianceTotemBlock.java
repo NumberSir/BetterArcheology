@@ -1,5 +1,6 @@
 package net.Pandarix.betterarcheology.block.custom;
 
+import net.Pandarix.betterarcheology.BetterArcheologyConfig;
 import net.Pandarix.betterarcheology.block.entity.ModBlockEntities;
 import net.Pandarix.betterarcheology.block.entity.RadianceTotemBlockEntity;
 import net.minecraft.block.Block;
@@ -88,7 +89,15 @@ public class RadianceTotemBlock extends FossilBaseWithEntityBlock
         {
             return ActionResult.PASS;
         }
-        ;
+        // if feature is disabled, notify the user and skip
+        if (!BetterArcheologyConfig.radianceTotemEnabled.get() || !BetterArcheologyConfig.totemsEnabled.get())
+        {
+            if (world.isClient())
+            {
+                player.sendMessage(Text.translatableWithFallback("config.notify.disabled", "This feature has been disabled in the config!"), true);
+            }
+            return ActionResult.PASS;
+        }
         BlockState newState = state.cycle(SELECTOR);
         world.setBlockState(pos, newState, 3);
         if (world.isClient())

@@ -2,6 +2,7 @@ package net.Pandarix.betterarcheology;
 
 import net.Pandarix.betterarcheology.block.ModBlocks;
 import net.Pandarix.betterarcheology.block.entity.ModBlockEntities;
+import net.Pandarix.betterarcheology.compat.jei.recipe.ModRecipeSerializers;
 import net.Pandarix.betterarcheology.enchantment.ModEnchantments;
 import net.Pandarix.betterarcheology.entity.ModEntityTypes;
 import net.Pandarix.betterarcheology.item.ModItemGroup;
@@ -9,7 +10,6 @@ import net.Pandarix.betterarcheology.item.ModItems;
 import net.Pandarix.betterarcheology.networking.ModMessages;
 import net.Pandarix.betterarcheology.screen.ModScreenHandlers;
 import net.Pandarix.betterarcheology.structures.ModStructureFeatures;
-import net.Pandarix.betterarcheology.util.ModConfigs;
 import net.Pandarix.betterarcheology.util.ModDispenserBehaviour;
 import net.Pandarix.betterarcheology.villager.ModVillagers;
 import net.Pandarix.betterarcheology.world.processor.ModProcessorTypes;
@@ -34,7 +34,7 @@ public class BetterArcheology implements ModInitializer
 
         LOGGER.info("Better Archeology says Hello");    //info message
 
-        ModConfigs.registerConfigs();
+        BetterArcheologyConfig.init();
 
         ModItemGroup.registerTab();        //creates CreativeModeTab
         ModItems.registerModItems();    //registers Items and adds them to the Tab
@@ -43,6 +43,7 @@ public class BetterArcheology implements ModInitializer
 
         ModBlockEntities.registerBlockEntities(); //registers Block-Entities
         ModScreenHandlers.registerAllScreenHandlers(); //registers all Screen-Handlers
+        ModRecipeSerializers.registerSerializers();
 
         ModVillagers.registerVillagers(); //registers all Villagers from BetterArcheology
         ModVillagers.registerTrades(); //registers all Villager Trades

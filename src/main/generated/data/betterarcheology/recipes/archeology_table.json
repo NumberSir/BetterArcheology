@@ -1,0 +1,24 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "category": "misc",
+  "key": {
+    "B": {
+      "tag": "c:brushes"
+    },
+    "S": {
+      "item": "betterarcheology:artifact_shards"
+    },
+    "W": {
+      "tag": "minecraft:planks"
+    }
+  },
+  "pattern": [
+    "BS",
+    "WW",
+    "WW"
+  ],
+  "result": {
+    "item": "betterarcheology:archeology_table"
+  },
+  "show_notification": true
+}

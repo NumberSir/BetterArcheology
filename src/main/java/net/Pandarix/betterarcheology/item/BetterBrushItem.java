@@ -15,6 +15,7 @@ import net.minecraft.sound.SoundEvent;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.util.Arm;
 import net.minecraft.util.Hand;
+import net.minecraft.util.UseAction;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.BlockPos;
@@ -35,15 +36,17 @@ public class BetterBrushItem extends BrushItem
         return brushingSpeed;
     }
 
-    public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks)
+    @Override
+    public UseAction getUseAction(ItemStack stack)
     {
-        if (remainingUseTicks >= 0 && user instanceof PlayerEntity playerEntity)
-        {
-            HitResult hitResult = this.getHitResult(playerEntity);
-            if (hitResult instanceof BlockHitResult blockHitResult)
-            {
-                if (hitResult.getType() == HitResult.Type.BLOCK)
-                {
+        return UseAction.BRUSH;
+    }
+
+    public void usageTick(World world, LivingEntity user, ItemStack stack, int remainingUseTicks) {
+        if (remainingUseTicks >= 0 && user instanceof PlayerEntity playerEntity) {
+            HitResult hitResult = this.getHitResult(user);
+            if (hitResult instanceof BlockHitResult blockHitResult) {
+                if (hitResult.getType() == HitResult.Type.BLOCK) {
                     int i = this.getMaxUseTime(stack) - remainingUseTicks + 1;
                     boolean bl = i % brushingSpeed == brushingSpeed / 2;
                     if (bl)
@@ -67,9 +70,7 @@ public class BetterBrushItem extends BrushItem
                         if (!world.isClient())
                         {
                             BlockEntity var18 = world.getBlockEntity(blockPos);
-                            if (var18 instanceof BrushableBlockEntity)
-                            {
-                                BrushableBlockEntity brushableBlockEntity = (BrushableBlockEntity) var18;
+                            if (var18 instanceof BrushableBlockEntity brushableBlockEntity) {
                                 boolean bl2 = brushableBlockEntity.brush(world.getTime(), playerEntity, blockHitResult.getSide());
                                 if (bl2)
                                 {

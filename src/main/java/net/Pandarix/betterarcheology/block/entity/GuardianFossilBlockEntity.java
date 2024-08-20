@@ -1,5 +1,6 @@
 package net.Pandarix.betterarcheology.block.entity;
 
+import net.Pandarix.betterarcheology.BetterArcheologyConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.effect.StatusEffectInstance;
@@ -20,6 +21,10 @@ public class GuardianFossilBlockEntity extends BlockEntity
 
     public static void tick(World world, BlockPos pos, BlockState state, GuardianFossilBlockEntity blockEntity)
     {
+        if (!BetterArcheologyConfig.fossilEffectsEnabled.get() || !BetterArcheologyConfig.guardianFossilEffectsEnabled.get())
+        {
+            return;
+        }
         //get players in bounding box of 10 blocks
         List<PlayerEntity> playersInRange = world.getNonSpectatingEntities(PlayerEntity.class, (new Box(pos).expand(10)));
         //give every player in range waterbreathing for 10 seconds, particles are not being displayed for ux

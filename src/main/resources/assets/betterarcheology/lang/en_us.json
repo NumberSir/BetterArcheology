@@ -83,12 +83,15 @@
   "advancements.all_fossils_found.description": "Collect all fossil parts!",
   "advancements.growth_totem": "Where you least expect it",
   "advancements.growth_totem.description": "Find the life that grew among the dead",
+  "advancements.netherite_brush.title": "Insane Investment",
+  "advancements.netherite_brush.description": "Sometimes, the path to greatness is paved with questionable choices - but never with dust.",
 
   "block.betterarcheology.fossil_head_set": " [1/2]",
   "block.betterarcheology.fossil_body_set": " [2/2]",
 
   "item.betterarcheology.iron_brush": "Iron Brush",
   "item.betterarcheology.diamond_brush": "Diamond Brush",
+  "item.betterarcheology.netherite_brush": "Netherite Brush",
   "block.betterarcheology.archeology_table": "Archeology Table",
   "item.betterarcheology.artifact_shards": "Artifact Shards",
   "item.betterarcheology.unidentified_artifact": "Unidentified Artifact",
@@ -116,8 +119,10 @@
   "enchantment.betterarcheology.soaring_winds": "Soaring Winds",
   "enchantment.betterarcheology.soaring_winds.desc": "Harnesses winds to give a startup-boost when using an Elytra",
   "enchantment.betterarcheology.tunneling": "Tunneling",
-  "enchantment.betterarcheology.tunneling.desc": "Also breaks the Block below the mined block",
+  "enchantment.betterarcheology.tunneling.desc": "Also breaks the Block below the mined block. Hold [SHIFT] to disable effects",
 
   "filled_map.catacombs": "Catacombs Explorer Map",
-  "filled_map.light": "Light Temple Explorer Map"
+  "filled_map.light": "Light Temple Explorer Map",
+
+  "config.notify.disabled": "This feature has been disabled in the config!"
 }

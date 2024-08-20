@@ -47,10 +47,7 @@ public class ModBlocks
 
     //-------------FOSSILS---------------//
     //Villager
-    public static final Block VILLAGER_FOSSIL = registerBlockWithRarity("villager_fossil", new VillagerFossilBlock(FabricBlockSettings.copy(Blocks.BONE_BLOCK).luminance((state) ->
-    {
-        return state.get(VillagerFossilBlock.INVENTORY_LUMINANCE);
-    })), ModItemGroup.BETTER_ARCHEOLOGY_ITEMGROUP, Rarity.UNCOMMON);
+    public static final Block VILLAGER_FOSSIL = registerBlockWithRarity("villager_fossil", new VillagerFossilBlock(FabricBlockSettings.copy(Blocks.BONE_BLOCK).luminance((state) -> state.get(VillagerFossilBlock.INVENTORY_LUMINANCE))), ModItemGroup.BETTER_ARCHEOLOGY_ITEMGROUP, Rarity.UNCOMMON);
 
     public static final Block VILLAGER_FOSSIL_HEAD = registerBlockWithRarity("villager_fossil_head", new VillagerFossilHeadBlock(FabricBlockSettings.copy(Blocks.SKELETON_SKULL).sounds(BlockSoundGroup.BONE)), ModItemGroup.BETTER_ARCHEOLOGY_ITEMGROUP, Rarity.UNCOMMON);
 

@@ -1,5 +1,6 @@
 package net.Pandarix.betterarcheology.enchantment;
 
+import net.Pandarix.betterarcheology.BetterArcheologyConfig;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.entity.EquipmentSlot;
 import net.minecraft.item.ElytraItem;
@@ -19,9 +20,12 @@ public class SoaringWindsEnchantment extends ArtifactEnchantment
     }
 
     @Override
-    public boolean isAcceptableItem(ItemStack stack)
-    {
-        return stack.getItem() instanceof ElytraItem;
+    public boolean isAcceptableItem(ItemStack stack) {
+        if (BetterArcheologyConfig.soaringWindsEnabled.get() && BetterArcheologyConfig.artifactsEnabled.get())
+        {
+            return stack.getItem() instanceof ElytraItem;
+        }
+        return false;
     }
 
 }

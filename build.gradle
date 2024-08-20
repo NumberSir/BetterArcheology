@@ -1,14 +1,14 @@
 plugins {
-	id 'fabric-loom' version '1.1-SNAPSHOT'
+	id 'fabric-loom' version '1.7-SNAPSHOT'
 	id 'maven-publish'
 }
 
-sourceCompatibility = JavaVersion.VERSION_17
-targetCompatibility = JavaVersion.VERSION_17
-
-archivesBaseName = project.archives_base_name
 version = project.mod_version
 group = project.maven_group
+
+base {
+	archivesName = project.archives_base_name
+}
 
 repositories {
 	// Add repositories to retrieve artifacts from in here.
@@ -24,13 +24,35 @@ repositories {
 		}
 	}
 	maven {
+		url "https://www.cursemaven.com"
+	}
+	maven {
 		name = "TerraformersMC"
 		url = "https://maven.terraformersmc.com/"
 	}
 	maven {
-		name = "Ladysnake Mods"
+		name = "Ladysnake Libs"
 		url = 'https://maven.ladysnake.org/releases'
 	}
+	maven {
+		// location of the maven that hosts JEI files before January 2023
+		name = "Progwml6's maven"
+		url = "https://dvs1.progwml6.com/files/maven/"
+	}
+	maven {
+		// location of the maven that hosts JEI files since January 2023
+		name = "Jared's maven"
+		url = "https://maven.blamejared.com/"
+	}
+	maven {
+		// location of a maven mirror for JEI files, as a fallback
+		name = "ModMaven"
+		url = "https://modmaven.dev"
+	}
+}
+
+fabricApi {
+	configureDataGeneration()
 }
 
 dependencies {
@@ -53,6 +75,13 @@ dependencies {
 	modApi include("dev.onyxstudios.cardinal-components-api:cardinal-components-base:${cca_version}")
 	modApi include("dev.onyxstudios.cardinal-components-api:cardinal-components-entity:${cca_version}")
 	modImplementation "dev.emi:trinkets:${trinkets_version}"
+
+	//CONFIG
+	modImplementation "curse.maven:supermartijn642s-config-lib-438332:${supermartins_config_file}"
+
+	modImplementation("mezz.jei:jei-${project.minecraft_version}-fabric:${jei_version}") {
+		exclude group: "mezz.jei"
+	}
 }
 
 processResources {
@@ -81,6 +110,9 @@ java {
 	// if it is present.
 	// If you remove this line, sources will not be generated.
 	withSourcesJar()
+
+	sourceCompatibility = JavaVersion.VERSION_17
+	targetCompatibility = JavaVersion.VERSION_17
 }
 
 jar {

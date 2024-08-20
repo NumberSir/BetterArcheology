@@ -24,6 +24,12 @@
     ],
     "client": [
       "net.Pandarix.betterarcheology.BetterArcheologyClient"
+    ],
+    "jei_mod_plugin": [
+      "net.Pandarix.betterarcheology.compat.jei.JeiPlugin"
+    ],
+    "fabric-datagen": [
+      "net.Pandarix.betterarcheology.datagen.ModDataGenerator"
     ]
   },
   "mixins": [
@@ -37,7 +43,8 @@
     "fabric-api": "*",
     "minecraft": "~1.20",
     "java": ">=17",
-    "yungsapi": ">=${yungsapi_mc_version}-Fabric-${yungsapi_version}"
+    "yungsapi": ">=${yungsapi_mc_version}-Fabric-${yungsapi_version}",
+    "supermartijn642configlib": ">=1.1.8"
   },
   "suggests": {
     "another-mod": "*"

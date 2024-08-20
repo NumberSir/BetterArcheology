@@ -1,5 +1,6 @@
 package net.Pandarix.betterarcheology.util;
 
+import net.Pandarix.betterarcheology.BetterArcheologyConfig;
 import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.ai.NoPenaltyTargeting;
 import net.minecraft.entity.ai.goal.Goal;
@@ -54,8 +55,7 @@ public class FleeBlockGoal<T extends BlockEntity> extends Goal
             } else if (vec3d.squaredDistanceTo(targetBlock.getPos().getX(), targetBlock.getPos().getY(), targetBlock.getPos().getZ()) < this.mob.squaredDistanceTo(this.targetBlock.getPos().toCenterPos()))
             {
                 return false;
-            } else
-            {
+            } else {
                 this.fleePath = this.fleeingEntityNavigation.findPathTo(vec3d.x, vec3d.y, vec3d.z, 0);
                 return this.fleePath != null;
             }
@@ -94,7 +94,7 @@ public class FleeBlockGoal<T extends BlockEntity> extends Goal
         for (BlockPos blockPos : blockEntityPos)
         {
             BlockEntity blockEntity = fleeingEntity.getEntityWorld().getBlockEntity(blockPos);
-            if (blockEntity != null && (blockEntity.getClass() == this.classToFleeFrom) && blockEntity.getPos().isWithinDistance(fleeingEntity.getPos(), ModConfigs.OCELOT_FOSSIL_FLEE_RANGE))
+            if (blockEntity != null && (blockEntity.getClass() == this.classToFleeFrom) && blockEntity.getPos().isWithinDistance(fleeingEntity.getPos(), BetterArcheologyConfig.fossilFleeRange.get()))
             { // Check if within distance
                 blockEntities.add(blockEntity);
             }
@@ -120,7 +120,7 @@ public class FleeBlockGoal<T extends BlockEntity> extends Goal
 
     public void tick()
     {
-        if (this.mob.squaredDistanceTo(this.targetBlock.getPos().toCenterPos()) < 49.0)
+        if (this.targetBlock != null && this.mob.squaredDistanceTo(this.targetBlock.getPos().toCenterPos()) < 49.0)
         {
             this.mob.getNavigation().setSpeed(this.fastSpeed);
         } else

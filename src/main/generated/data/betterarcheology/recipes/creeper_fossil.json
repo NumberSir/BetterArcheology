@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "group": "ba_fossils",
+  "ingredients": [
+    {
+      "item": "betterarcheology:creeper_fossil_body"
+    },
+    {
+      "item": "betterarcheology:creeper_fossil_head"
+    }
+  ],
+  "result": {
+    "item": "betterarcheology:creeper_fossil"
+  }
+}

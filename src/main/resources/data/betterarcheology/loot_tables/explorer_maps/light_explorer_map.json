@@ -11,7 +11,7 @@
             {
               "function": "minecraft:exploration_map",
               "destination": "betterarcheology:on_light_explorer_map",
-              "decoration": "jungle_temple",
+              "decoration": "mansion",
               "zoom": 4,
               "skip_existing_chunks": false
             },

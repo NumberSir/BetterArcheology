@@ -3,8 +3,12 @@ package net.Pandarix.betterarcheology.block.custom;
 import com.mojang.serialization.MapCodec;
 import net.minecraft.block.*;
 import net.minecraft.client.item.TooltipContext;
+import net.minecraft.entity.EquipmentSlot;
+import net.minecraft.item.Equipment;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
+import net.minecraft.sound.SoundEvent;
+import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.DirectionProperty;
 import net.minecraft.text.Text;
@@ -20,7 +24,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class FossilBaseHeadBlock extends HorizontalFacingBlock
+public class FossilBaseHeadBlock extends HorizontalFacingBlock implements Equipment
 {
     public static final MapCodec<FossilBaseHeadBlock> CODEC = createCodec(FossilBaseHeadBlock::new);
 
@@ -81,5 +85,17 @@ public class FossilBaseHeadBlock extends HorizontalFacingBlock
     public BlockState mirror(BlockState state, BlockMirror mirror)
     {
         return state.rotate(mirror.getRotation((Direction) state.get(FACING)));
+    }
+
+    @Override
+    public EquipmentSlot getSlotType()
+    {
+        return EquipmentSlot.HEAD;
+    }
+
+    @Override
+    public SoundEvent getEquipSound()
+    {
+        return SoundEvents.ITEM_ARMOR_EQUIP_TURTLE;
     }
 }

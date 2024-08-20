@@ -1,5 +1,6 @@
 package net.Pandarix.betterarcheology.block.custom;
 
+import net.Pandarix.betterarcheology.BetterArcheologyConfig;
 import net.minecraft.block.BlockState;
 import net.minecraft.block.CropBlock;
 import net.minecraft.block.FlowerBlock;
@@ -36,11 +37,16 @@ public class GrowthTotemBlock extends FlowerBlock
     @Override
     public void randomDisplayTick(BlockState state, World world, BlockPos pos, Random random)
     {
+        super.randomDisplayTick(state, world, pos, random);
+        if (!BetterArcheologyConfig.totemsEnabled.get() || !BetterArcheologyConfig.growthTotemEnabled.get())
+        {
+            return;
+        }
         if (world.isClient() && random.nextBetween(0, 15) == 0)
         {
-            for (int i = -5; i <= 5; i++)
+            for (int i = -BetterArcheologyConfig.growthTotemGrowRadius.get(); i <= BetterArcheologyConfig.growthTotemGrowRadius.get(); i++)
             {
-                for (int j = -5; j <= 5; j++)
+                for (int j = -BetterArcheologyConfig.growthTotemGrowRadius.get(); j <= BetterArcheologyConfig.growthTotemGrowRadius.get(); j++)
                 {
                     if (random.nextBetween(0, 3) == 3)
                     {
@@ -55,7 +61,6 @@ public class GrowthTotemBlock extends FlowerBlock
                 }
             }
         }
-        super.randomDisplayTick(state, world, pos, random);
     }
 
     @Override
@@ -67,19 +72,23 @@ public class GrowthTotemBlock extends FlowerBlock
     @Override
     public void randomTick(BlockState pState, ServerWorld world, BlockPos pPos, Random random)
     {
-        if (random.nextBoolean())
+        if (!BetterArcheologyConfig.totemsEnabled.get() || !BetterArcheologyConfig.growthTotemEnabled.get())
         {
             return;
         }
-        for (int i = -5; i <= 5; i++)
+        if (random.nextBetween(1, 100) > BetterArcheologyConfig.growthTotemGrowChance.get())
         {
-            for (int j = -5; j <= 5; j++)
+            return;
+        }
+        for (int i = -BetterArcheologyConfig.growthTotemGrowRadius.get(); i <= BetterArcheologyConfig.growthTotemGrowRadius.get(); i++)
+        {
+            for (int j = -BetterArcheologyConfig.growthTotemGrowRadius.get(); j <= BetterArcheologyConfig.growthTotemGrowRadius.get(); j++)
             {
                 BlockPos pos = pPos.add(i, 0, j);
                 BlockState state = world.getBlockState(pos);
                 if (state.getBlock() instanceof CropBlock cropBlock)
                 {
-                    if (cropBlock.isFertilizable(world, pos, state))
+                    if (cropBlock.isFertilizable(world, pos, state, world.isClient()))
                     {
                         if (cropBlock.canGrow(world, world.random, pos, state))
                         {

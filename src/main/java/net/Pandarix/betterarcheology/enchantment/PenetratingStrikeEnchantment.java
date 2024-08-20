@@ -1,6 +1,6 @@
 package net.Pandarix.betterarcheology.enchantment;
 
-import net.Pandarix.betterarcheology.util.ModConfigs;
+import net.Pandarix.betterarcheology.BetterArcheologyConfig;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.EnchantmentTarget;
 import net.minecraft.enchantment.Enchantments;
@@ -26,11 +26,15 @@ public class PenetratingStrikeEnchantment extends ArtifactEnchantment
     @Override
     public boolean isAcceptableItem(ItemStack stack)
     {
-        if (stack.getItem() instanceof AxeItem)
+        if (BetterArcheologyConfig.penetratingStrikeEnabled.get() && BetterArcheologyConfig.artifactsEnabled.get())
         {
-            return true;
+            if (stack.getItem() instanceof AxeItem || stack.getItem() instanceof SwordItem)
+            {
+                return true;
+            }
+            return super.isAcceptableItem(stack);
         }
-        return super.isAcceptableItem(stack);
+        return false;
     }
 
     //Enchantment Functionality-------------------------------------------------------------------------//
@@ -48,7 +52,7 @@ public class PenetratingStrikeEnchantment extends ArtifactEnchantment
     @Override
     public void onTargetDamaged(LivingEntity user, Entity target, int level)
     {
-        if (!ModConfigs.ARTIFACT_ENCHANTMENTS_ENABLED)
+        if (!BetterArcheologyConfig.artifactsEnabled.get() || !BetterArcheologyConfig.penetratingStrikeEnabled.get())
         {
             return;
         }
@@ -85,7 +89,7 @@ public class PenetratingStrikeEnchantment extends ArtifactEnchantment
         {
             if (user instanceof PlayerEntity player)
             {
-                target.damage(player.getDamageSources().magic(), (float) (totalProtectedDamage * ModConfigs.PENETRATING_STRIKE_PROTECTION_IGNORANCE));
+                target.damage(player.getDamageSources().magic(), (float) (totalProtectedDamage * BetterArcheologyConfig.penetratingStrikeIgnorance.get()));
             }
         }
 
